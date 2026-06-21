@@ -35,3 +35,5 @@ build/
 ### Environment variables ###
 .env
 *.env
+### Local config (contains secrets) ###
+application.properties
