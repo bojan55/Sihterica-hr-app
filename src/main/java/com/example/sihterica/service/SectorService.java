@@ -1,5 +1,6 @@
 package com.example.sihterica.service;
 
+import com.example.sihterica.dto.SectorRequestDTO;
 import com.example.sihterica.dto.SectorResponseDTO;
 import com.example.sihterica.model.Sector;
 import com.example.sihterica.repository.SectorRepository;
@@ -21,9 +22,9 @@ public class SectorService {
                 .toList();
     }
 
-    public SectorResponseDTO createSector(String name){
+    public SectorResponseDTO createSector(SectorRequestDTO sectorRequestDTO){
         Sector sector = new Sector();
-        sector.setName(name);
+        sector.setName(sectorRequestDTO.getName());
         Sector saved = sectorRepository.save(sector);
         return mapToResponseDTO(saved);
     }
