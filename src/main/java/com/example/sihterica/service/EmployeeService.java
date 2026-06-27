@@ -10,6 +10,8 @@ import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class EmployeeService {
@@ -33,6 +35,36 @@ public class EmployeeService {
         Employee saved = employeeRepository.save(employee);
         return mapToResponseDTO(saved);
     }
+
+    public List<EmployeeResponseDTO> getAllEmployees(){
+        return employeeRepository.findAll()
+                .stream()
+                .map(this::mapToResponseDTO)
+                .toList();
+    }
+
+    public EmployeeResponseDTO updateEmployee(Long id, EmployeeRequestDTO requestDTO){
+        Employee employee = employeeRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException(
+                        "Employee not found with id: " + id
+                ));
+
+        Sector sector = sectorRepository.findById(requestDTO.getSectorId())
+                .orElseThrow(() -> new EntityNotFoundException(
+                        "Sector not found with id: " + requestDTO.getSectorId()
+                ));
+
+        employee.setFirstName(requestDTO.getFirstName());
+        employee.setLastName(requestDTO.getLastName());
+        employee.setSector(sector);
+        employee.setPosition(requestDTO.getPosition());
+        employee.setEmploymentDate(requestDTO.getEmploymentDate());
+        employee.setStatus(requestDTO.getStatus());
+
+        Employee updated = employeeRepository.save(employee);
+        return mapToResponseDTO(updated);
+    }
+
 
     private EmployeeResponseDTO mapToResponseDTO(Employee employee){
         return new EmployeeResponseDTO(
