@@ -11,6 +11,7 @@ import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -19,6 +20,7 @@ public class EmployeeService {
 
     private final EmployeeRepository employeeRepository;
     private final SectorRepository sectorRepository;
+    private final AttendanceRecordService attendanceRecordService;
 
     public EmployeeResponseDTO createEmployee(EmployeeRequestDTO requestDTO){
         Sector sector = sectorRepository.findById(requestDTO.getSectorId())
@@ -34,6 +36,7 @@ public class EmployeeService {
         employee.setStatus(requestDTO.getStatus());
 
         Employee saved = employeeRepository.save(employee);
+        attendanceRecordService.generateYearForEmployee(saved.getId(), LocalDate.now().getYear());
         return mapToResponseDTO(saved);
     }
 
