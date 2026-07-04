@@ -1,5 +1,7 @@
 package com.example.sihterica.service;
 
+import com.example.sihterica.dto.AttendanceRecordRequestDTO;
+import com.example.sihterica.dto.AttendanceRecordResponseDTO;
 import com.example.sihterica.model.AttendanceCode;
 import com.example.sihterica.model.AttendanceRecord;
 import com.example.sihterica.model.Employee;
@@ -43,8 +45,30 @@ public class AttendanceRecordService {
         }
     }
 
+    public AttendanceRecordResponseDTO updateAttendanceRecord(Long recordId, AttendanceRecordRequestDTO requestDTO ){
+        AttendanceRecord record = attendanceRecordRepository.findById(recordId)
+                .orElseThrow(()-> new EntityNotFoundException(
+                        "Attendance record not found with id: " + recordId
+                ));
+
+        record.setCode(requestDTO.getCode());
+        record.setHours(requestDTO.getCode().getDefaultHours());
+
+        AttendanceRecord updated = attendanceRecordRepository.save(record);
+        return mapToResponseDTO(updated);
+    }
+
     private boolean isWeekend(LocalDate date) {
         DayOfWeek day = date.getDayOfWeek();
         return day == DayOfWeek.SATURDAY || day == DayOfWeek.SUNDAY;
+    }
+
+    private AttendanceRecordResponseDTO mapToResponseDTO(AttendanceRecord record){
+        return new AttendanceRecordResponseDTO(
+                record.getId(),
+                record.getDate(),
+                record.getCode(),
+                record.getHours()
+        );
     }
 }
