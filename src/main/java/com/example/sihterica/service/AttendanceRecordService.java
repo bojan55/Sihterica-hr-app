@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -56,6 +57,21 @@ public class AttendanceRecordService {
 
         AttendanceRecord updated = attendanceRecordRepository.save(record);
         return mapToResponseDTO(updated);
+    }
+
+    public List<AttendanceRecordResponseDTO> getAttendanceForEmployee(Long employeeId, int year){
+        employeeRepository.findById(employeeId)
+                .orElseThrow(()-> new EntityNotFoundException(
+                        "Employee not found with id: " + employeeId));
+
+        LocalDate startDate = LocalDate.of(year, 1,1);
+        LocalDate endDate = LocalDate.of(year, 12, 31);
+
+        return attendanceRecordRepository
+                .findByEmployeeIdAndDateBetween(employeeId, startDate, endDate)
+                .stream()
+                .map(this::mapToResponseDTO)
+                .toList();
     }
 
     private boolean isWeekend(LocalDate date) {
