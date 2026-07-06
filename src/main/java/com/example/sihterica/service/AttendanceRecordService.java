@@ -1,5 +1,6 @@
 package com.example.sihterica.service;
 
+import com.example.sihterica.dto.AttendanceAggregationDTO;
 import com.example.sihterica.dto.AttendanceRecordRequestDTO;
 import com.example.sihterica.dto.AttendanceRecordResponseDTO;
 import com.example.sihterica.model.AttendanceCode;
@@ -13,7 +14,9 @@ import org.springframework.stereotype.Service;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
@@ -72,6 +75,33 @@ public class AttendanceRecordService {
                 .stream()
                 .map(this::mapToResponseDTO)
                 .toList();
+    }
+
+    public AttendanceAggregationDTO getMonthlyAggregation(Long employeeId, int year, int month) {
+        Employee employee = employeeRepository.findById(employeeId)
+                .orElseThrow(() -> new EntityNotFoundException(
+                        "Employee not found with id: " + employeeId));
+
+        LocalDate startDate = LocalDate.of(year, month, 1);
+        LocalDate endDate = startDate.withDayOfMonth(startDate.lengthOfMonth());
+
+        List<AttendanceRecord> records = attendanceRecordRepository
+                .findByEmployeeIdAndDateBetween(employeeId, startDate, endDate);
+
+        Map<String, Integer> totalsByCode = new LinkedHashMap<>();
+        for (AttendanceRecord record : records){
+            String label = record.getCode().getLabel();
+            int hours = record.getHours();
+            totalsByCode.merge(label, hours, Integer::sum);
+        }
+
+        return new AttendanceAggregationDTO(
+                employeeId,
+                employee.getFirstName() + " " + employee.getLastName(),
+                year,
+                month,
+                totalsByCode
+        );
     }
 
     private boolean isWeekend(LocalDate date) {
