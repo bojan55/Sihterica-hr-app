@@ -4,6 +4,7 @@ import com.example.sihterica.dto.AttendanceAggregationDTO;
 import com.example.sihterica.dto.AttendanceRecordRequestDTO;
 import com.example.sihterica.dto.AttendanceRecordResponseDTO;
 import com.example.sihterica.service.AttendanceRecordService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -27,6 +28,7 @@ public class AttendanceRecordController {
     @PutMapping("/{recordId}")
     public ResponseEntity<AttendanceRecordResponseDTO> updateAttendanceRecord(
             @PathVariable Long recordId,
+            @Valid
             @RequestBody AttendanceRecordRequestDTO requestDTO){
         return ResponseEntity.ok(attendanceRecordService.updateAttendanceRecord(recordId, requestDTO));
     }

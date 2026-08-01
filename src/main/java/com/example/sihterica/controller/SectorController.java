@@ -3,6 +3,7 @@ package com.example.sihterica.controller;
 import com.example.sihterica.dto.SectorRequestDTO;
 import com.example.sihterica.dto.SectorResponseDTO;
 import com.example.sihterica.service.SectorService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -22,7 +23,7 @@ public class SectorController {
     }
 
     @PostMapping
-    public ResponseEntity<SectorResponseDTO> createSector(@RequestBody SectorRequestDTO requestDTO){
+    public ResponseEntity<SectorResponseDTO> createSector(@Valid @RequestBody SectorRequestDTO requestDTO){
         SectorResponseDTO created = sectorService.createSector(requestDTO);
         return ResponseEntity.status(201).body(created);
     }

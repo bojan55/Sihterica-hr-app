@@ -3,6 +3,7 @@ package com.example.sihterica.controller;
 import com.example.sihterica.dto.EmployeeRequestDTO;
 import com.example.sihterica.dto.EmployeeResponseDTO;
 import com.example.sihterica.service.EmployeeService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -22,14 +23,14 @@ public class EmployeeController {
     }
 
     @PostMapping
-    public ResponseEntity<EmployeeResponseDTO> createEmployee(@RequestBody EmployeeRequestDTO requestDTO){
+    public ResponseEntity<EmployeeResponseDTO> createEmployee(@Valid @RequestBody EmployeeRequestDTO requestDTO){
         EmployeeResponseDTO created = employeeService.createEmployee(requestDTO);
         return ResponseEntity.status(201).body(created);
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<EmployeeResponseDTO> updateEmployee(
-            @PathVariable Long id, @RequestBody EmployeeRequestDTO requestDTO){
+            @PathVariable Long id,@Valid @RequestBody EmployeeRequestDTO requestDTO){
         EmployeeResponseDTO updated = employeeService.updateEmployee(id, requestDTO);
         return ResponseEntity.ok(updated);
     }
