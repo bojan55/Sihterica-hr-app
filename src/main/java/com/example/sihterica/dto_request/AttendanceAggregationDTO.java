@@ -1,4 +1,4 @@
-package com.example.sihterica.dto;
+package com.example.sihterica.dto_request;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

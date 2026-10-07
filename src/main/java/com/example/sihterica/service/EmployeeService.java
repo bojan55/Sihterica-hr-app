@@ -1,7 +1,7 @@
 package com.example.sihterica.service;
 
-import com.example.sihterica.dto.EmployeeRequestDTO;
-import com.example.sihterica.dto.EmployeeResponseDTO;
+import com.example.sihterica.dto_request.EmployeeRequestDTO;
+import com.example.sihterica.dto_response.EmployeeResponseDTO;
 import com.example.sihterica.model.Employee;
 import com.example.sihterica.model.EmployeeStatus;
 import com.example.sihterica.model.Sector;

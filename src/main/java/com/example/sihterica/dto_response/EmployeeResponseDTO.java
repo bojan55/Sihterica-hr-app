@@ -1,4 +1,4 @@
-package com.example.sihterica.dto;
+package com.example.sihterica.dto_response;
 
 import com.example.sihterica.model.EmployeeStatus;
 import lombok.AllArgsConstructor;

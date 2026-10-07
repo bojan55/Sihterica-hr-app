@@ -1,4 +1,4 @@
-package com.example.sihterica.dto;
+package com.example.sihterica.dto_request;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;

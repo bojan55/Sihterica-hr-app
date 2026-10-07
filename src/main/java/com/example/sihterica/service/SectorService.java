@@ -1,7 +1,7 @@
 package com.example.sihterica.service;
 
-import com.example.sihterica.dto.SectorRequestDTO;
-import com.example.sihterica.dto.SectorResponseDTO;
+import com.example.sihterica.dto_request.SectorRequestDTO;
+import com.example.sihterica.dto_response.SectorResponseDTO;
 import com.example.sihterica.model.Sector;
 import com.example.sihterica.repository.SectorRepository;
 import lombok.RequiredArgsConstructor;

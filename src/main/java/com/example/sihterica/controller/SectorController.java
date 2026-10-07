@@ -1,7 +1,7 @@
 package com.example.sihterica.controller;
 
-import com.example.sihterica.dto.SectorRequestDTO;
-import com.example.sihterica.dto.SectorResponseDTO;
+import com.example.sihterica.dto_request.SectorRequestDTO;
+import com.example.sihterica.dto_response.SectorResponseDTO;
 import com.example.sihterica.service.SectorService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

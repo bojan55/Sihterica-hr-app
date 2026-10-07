@@ -17,7 +17,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     private final UserRepository userRepository;
 
-   /* public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException{
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userRepository.findByUsername(username)
                 .orElseThrow(() -> new UsernameNotFoundException(
                         "User not found with username: " + username
@@ -28,5 +28,5 @@ public class CustomUserDetailsService implements UserDetailsService {
                 user.getPassword(),
                 List.of(new SimpleGrantedAuthority(user.getRole()))
         );
-    }/*
+    }
 }

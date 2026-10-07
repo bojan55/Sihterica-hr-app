@@ -1,8 +1,8 @@
 package com.example.sihterica.controller;
 
-import com.example.sihterica.dto.AttendanceAggregationDTO;
-import com.example.sihterica.dto.AttendanceRecordRequestDTO;
-import com.example.sihterica.dto.AttendanceRecordResponseDTO;
+import com.example.sihterica.dto_request.AttendanceAggregationDTO;
+import com.example.sihterica.dto_request.AttendanceRecordRequestDTO;
+import com.example.sihterica.dto_response.AttendanceRecordResponseDTO;
 import com.example.sihterica.service.AttendanceRecordService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

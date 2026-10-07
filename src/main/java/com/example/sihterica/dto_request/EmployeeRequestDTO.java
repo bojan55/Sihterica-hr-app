@@ -1,4 +1,4 @@
-package com.example.sihterica.dto;
+package com.example.sihterica.dto_request;
 
 import com.example.sihterica.model.EmployeeStatus;
 import jakarta.validation.constraints.NotBlank;

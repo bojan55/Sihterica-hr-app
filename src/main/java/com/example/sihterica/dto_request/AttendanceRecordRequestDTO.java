@@ -1,21 +1,18 @@
-package com.example.sihterica.dto;
+package com.example.sihterica.dto_request;
 
 import com.example.sihterica.model.AttendanceCode;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalDate;
-
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class AttendanceRecordResponseDTO {
+public class AttendanceRecordRequestDTO {
 
-    private Long id;
-    private LocalDate date;
+    @NotNull(message = "Attendance code cannot be null")
     private AttendanceCode code;
-    private int hours;
 }

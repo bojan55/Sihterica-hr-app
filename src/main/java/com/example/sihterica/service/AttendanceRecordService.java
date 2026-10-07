@@ -1,8 +1,8 @@
 package com.example.sihterica.service;
 
-import com.example.sihterica.dto.AttendanceAggregationDTO;
-import com.example.sihterica.dto.AttendanceRecordRequestDTO;
-import com.example.sihterica.dto.AttendanceRecordResponseDTO;
+import com.example.sihterica.dto_request.AttendanceAggregationDTO;
+import com.example.sihterica.dto_request.AttendanceRecordRequestDTO;
+import com.example.sihterica.dto_response.AttendanceRecordResponseDTO;
 import com.example.sihterica.model.AttendanceCode;
 import com.example.sihterica.model.AttendanceRecord;
 import com.example.sihterica.model.Employee;
