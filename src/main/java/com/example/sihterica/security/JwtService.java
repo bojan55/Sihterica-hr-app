@@ -1,5 +1,6 @@
 package com.example.sihterica.security;
 
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;
@@ -30,5 +31,25 @@ public class JwtService {
                 .compact();
     }
 
+    private Claims extractClaims(String token){
+        return Jwts.parser()
+                .verifyWith(getSigningKey())
+                .build()
+                .parseSignedClaims(token)
+                .getPayload();
+    }
+
+    public String extractUsername(String token){
+        return extractClaims(token).getSubject();
+    }
+
+    public boolean validateToken(String token){
+        try {
+            extractClaims(token);
+            return true;
+        } catch (Exception e){
+            return false;
+        }
+    }
 
 }
